@@ -14,6 +14,12 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.layer == LayerMask.GetMask("Terrain"))
         {
             Debug.Log("Bullet hit object");
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                other.gameObject.GetComponent<EnemyStats>().Damage();
+                Debug.Log("Enemy is hit");
+            }
+            Destroy(gameObject);
         }
     }
 }

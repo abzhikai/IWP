@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Animator animator;
 
     private bool isMidAir;
-
+    private bool jump;
     //bool jumping = false;
     //bool secondCheck = false;
 
@@ -43,28 +43,34 @@ public class PlayerMovement : MonoBehaviour
         if (dirX > 0)
         {
             spriteRenderer2D.flipX = true;
-            Debug.Log("SpriteFlipped");
+            //Debug.Log("SpriteFlipped");
         }
         else if (dirX < 0)
         {
             spriteRenderer2D.flipX = false;
-            Debug.Log("SpriteFlipped");
+            //Debug.Log("SpriteFlipped");
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
+        //if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W))
+        //{
+        //    if (isMidAir == false)
+        //    {
+        //        jump = true;
+        //        //Debug.Log("jump");
+        //    }
+        //}
+        jump = (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) && (isMidAir == false);
+
+        if (jump == true)
         {
-            if (isMidAir == false)
-            {
-                JumpMovement();
-                //Debug.Log("jump");
-            }
+            JumpMovement();
         }
 
-        // Attack button
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            
-        }
+        //// Attack button
+        //if (Input.GetKeyDown(KeyCode.Mouse0))
+        //{
+
+        //}
 
         animator.SetFloat("Speed", Mathf.Pow(rigidBody2D.velocity.magnitude, 0.5f), 0.1f, Time.deltaTime);
 
@@ -75,6 +81,8 @@ public class PlayerMovement : MonoBehaviour
     {
         // Jump Check
         isMidAir = !Physics2D.Raycast(rigidBody2D.position, -Vector2.up, 0.1f + (GetComponent<Collider2D>().bounds.extents.y), ~LayerMask.GetMask("Player"));
+        
+        // Movement
         rigidBody2D.velocity = new Vector2(dirX * speed, rigidBody2D.velocity.y);
         //Debug.Log(isMidAir);
     }
@@ -82,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
     void JumpMovement()
     {
         rigidBody2D.velocity = new Vector2(rigidBody2D.velocity.x, jumpHeight);
+        //jump = false;
     }
 
 }

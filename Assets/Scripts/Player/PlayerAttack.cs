@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
 
-    float attackCooldown = 1;
+    float attackCooldown = 0.5f;
     bool canAttack = true;
 
     enum AttackType
@@ -34,14 +34,12 @@ public class PlayerAttack : MonoBehaviour
         float scrollInput = Input.GetAxis("Mouse ScrollWheel");
         if (scrollInput > 0f)
         {
-            Debug.Log("Scroll Up");
             // Scrolled up
             if (currentAttackType > AttackType.SHOOTING)
                 currentAttackType--;
         }
         else if (scrollInput < 0f)
         {
-            Debug.Log("Scroll Down");
             // Scrolled down
             if (currentAttackType < AttackType.MELEE)
                 currentAttackType++;
@@ -127,4 +125,5 @@ public class PlayerAttack : MonoBehaviour
         Vector2 dir = (mousePos - (Vector2)transform.position).normalized;
         return dir;
     }
+
 }
