@@ -2,30 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum EnemyState
+public class BossEnemy : MonoBehaviour
 {
-    IDLE,
-    PATROLING,
-    CHASING,
-    ATTACKING,
-    DEAD,
-}
-
-enum Direction
-{
-    LEFT,
-    RIGHT,
-}
-
-public class GroundEnemy : MonoBehaviour
-{
-    int speed = 750, jumpHeight = 750;
+    int speed = 600, jumpHeight = 750;
     Animator animator;
 
     private Rigidbody2D rigidBody2D;
     [SerializeField] private SpriteRenderer spriteRenderer2D;
-    [SerializeField] private CircleCollider2D circleCollider2D;
-    
+    [SerializeField] private CapsuleCollider2D capsuleCollider2D;
+
     [SerializeField] GameObject groundDetection;
     // Left detection
     [SerializeField] Vector2 detectionPointA = new Vector2(-1, -0.5f);
@@ -49,6 +34,10 @@ public class GroundEnemy : MonoBehaviour
     float dmgTimer = 0;
     bool knockback;
 
+    float attackCooldown = 0.5f;
+    bool canAttack = true;
+
+    // Start is called before the first frame update
     void Start()
     {
         rigidBody2D = GetComponent<Rigidbody2D>();
@@ -58,6 +47,7 @@ public class GroundEnemy : MonoBehaviour
         knockback = false;
     }
 
+    // Update is called once per frame
     void Update()
     {
         if (doingAction)
@@ -118,7 +108,7 @@ public class GroundEnemy : MonoBehaviour
                 break;
             case EnemyState.CHASING:
                 {
-                    speed = 750;
+                    speed = 600;
                     if (!SightRange())
                     {
                         currentEnemyState = EnemyState.IDLE;
@@ -128,7 +118,22 @@ public class GroundEnemy : MonoBehaviour
                 break;
             case EnemyState.ATTACKING:
                 {
+                    speed = 300;
+                    Collider2D meleeRange = Physics2D.OverlapCircle((Vector2)transform.position, 3, LayerMask.GetMask("Player"));
+                    if (currentAttackType == AttackType.SHOOTING)
+                        attackCooldown = 0.7f;
+                    else if (currentAttackType == AttackType.MELEE)
+                        attackCooldown = 1.0f;
 
+                    if (meleeRange == true)
+                    {
+                        gameObject.GetComponent<BossAttack>().Melee(meleeRange.gameObject);
+                    }
+                    else
+                    {
+                        gameObject.GetComponent<BossAttack>().Shoot(meleeRange.gameObject);
+                    }
+                    currentEnemyState = EnemyState.CHASING;
                 }
                 break;
             case EnemyState.DEAD:
@@ -155,7 +160,7 @@ public class GroundEnemy : MonoBehaviour
         if (enemyStats.damageTaken == true)
         {
             dmgTimer += Time.deltaTime;
-            GameObject player =  GameObject.Find("Player");
+            GameObject player = GameObject.Find("Player");
             int playerATK = player.GetComponent<PlayerStats>().GetAtk();
             enemyStats.Damaged(playerATK);
             Debug.Log("Dealt DMG");
@@ -209,7 +214,7 @@ public class GroundEnemy : MonoBehaviour
 
     bool SightRange()
     {
-        Collider2D collider = Physics2D.OverlapCircle((Vector2)transform.position, 10, LayerMask.GetMask("Player"));
+        Collider2D collider = Physics2D.OverlapCircle((Vector2)transform.position, 15, LayerMask.GetMask("Player"));
         if (collider != null)
         {
             // Set the target of the enemy
@@ -245,13 +250,11 @@ public class GroundEnemy : MonoBehaviour
         return Random.Range(0, 2);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    IEnumerator ResetAttackCooldown()
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            GameObject player = GameObject.Find("Player");
-            player.GetComponent<PlayerStats>().Damaged(enemyStats.GetAtk());
-            Debug.Log("Player is hit");
-        }
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
     }
+
 }
+

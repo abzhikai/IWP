@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    //[SerializeField] Vector2 knockbackForce;
     void Start()
     {
         Destroy(gameObject, 5);
@@ -16,8 +17,8 @@ public class Bullet : MonoBehaviour
             Debug.Log("Bullet hit object");
             if (other.gameObject.CompareTag("Enemy"))
             {
-                other.gameObject.GetComponent<EnemyStats>().Damage();
-                Debug.Log("Enemy is hit");
+                other.gameObject.GetComponent<EnemyStats>().damageTaken = true;
+                //other.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackForce);
             }
             Destroy(gameObject);
         }

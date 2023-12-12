@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
-    [SerializeField]int HP = 25, ATK = 5;
+    [SerializeField]int maxHP = 25, HP, ATK = 5;
 
-    bool damageTaken;
+    public bool damageTaken;
     // Start is called before the first frame update
     void Start()
     {
-        
+        HP = maxHP;
     }
 
     // Update is called once per frame
@@ -22,14 +22,23 @@ public class EnemyStats : MonoBehaviour
         }
     }
 
-    public void Damage()
+    public void Damaged(int dmg)
     {
+        HP -= dmg;
         damageTaken = true;
     }
 
-    public int GetEnemyAtk()
+    public int GetAtk()
     {
         return ATK;
     }
 
+    public int GetHP()
+    {
+        return HP;
+    }
+    public int GetMaxHP()
+    {
+        return maxHP;
+    }
 }

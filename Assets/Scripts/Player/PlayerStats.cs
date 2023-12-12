@@ -4,29 +4,41 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField]int HP = 100, ATK = 5;
+    [SerializeField]int maxHP = 100, HP, ATK = 5;
 
     bool damageTaken;
     // Start is called before the first frame update
     void Start()
     {
-        
+        HP = maxHP;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (HP <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    public void Damage()
+    public void Damaged(int dmg)
     {
+        HP -= dmg;
         damageTaken = true;
-
     }
 
-    public int GetPlayerAtk()
+    public int GetAtk()
     {
         return ATK;
+    }
+
+    public int GetHP()
+    {
+        return HP;
+    }
+    public int GetMaxHP()
+    {
+        return maxHP;
     }
 }
