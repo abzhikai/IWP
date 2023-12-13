@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] Slider PlayerHP;
     [SerializeField] GameObject player;
 
+    [SerializeField] GameObject gameOverPanel;
+
     int currentPlayerHP;
     int maxPlayerHP;
     // Start is called before the first frame update
@@ -24,6 +26,14 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerHP.value = currentPlayerHP;
+        if (player != null)
+        {
+            currentPlayerHP = player.GetComponent<PlayerStats>().GetHP();
+            PlayerHP.value = currentPlayerHP;
+        }
+        else
+        {
+            gameOverPanel.SetActive(true);
+        }
     }
 }

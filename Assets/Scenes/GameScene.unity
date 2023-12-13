@@ -753,7 +753,7 @@ GameObject:
   - component: {fileID: 345452607}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1583,6 +1583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerHP: {fileID: 1395819818}
   player: {fileID: 345452600}
+  gameOverPanel: {fileID: 186432102}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

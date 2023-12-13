@@ -120,10 +120,6 @@ public class BossEnemy : MonoBehaviour
                 {
                     speed = 300;
                     Collider2D meleeRange = Physics2D.OverlapCircle((Vector2)transform.position, 3, LayerMask.GetMask("Player"));
-                    if (currentAttackType == AttackType.SHOOTING)
-                        attackCooldown = 0.7f;
-                    else if (currentAttackType == AttackType.MELEE)
-                        attackCooldown = 1.0f;
 
                     if (meleeRange == true)
                     {

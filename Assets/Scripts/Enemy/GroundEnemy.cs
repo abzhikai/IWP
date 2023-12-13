@@ -244,14 +244,4 @@ public class GroundEnemy : MonoBehaviour
     {
         return Random.Range(0, 2);
     }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            GameObject player = GameObject.Find("Player");
-            player.GetComponent<PlayerStats>().Damaged(enemyStats.GetAtk());
-            Debug.Log("Player is hit");
-        }
-    }
 }
