@@ -34,8 +34,17 @@ public class BossEnemy : MonoBehaviour
     float dmgTimer = 0;
     bool knockback;
 
-    float attackCooldown = 0.5f;
+    float attackCooldown = 1f;
     bool canAttack = true;
+    float attackTimer = 0;
+
+    enum AttackType
+    {
+        SHOOTING,
+        MELEE,
+    }
+
+    AttackType currentAttackType;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +61,12 @@ public class BossEnemy : MonoBehaviour
     {
         if (doingAction)
             actionTimer -= Time.deltaTime;
+
+        attackTimer += Time.deltaTime;
+        if (attackTimer >= attackCooldown)
+        {
+            canAttack = true;
+        }
 
         // Enemy AI
         switch (currentEnemyState)
@@ -78,7 +93,7 @@ public class BossEnemy : MonoBehaviour
                 break;
             case EnemyState.PATROLING:
                 {
-                    speed = 600;
+                    speed = 300;
                     if (!doingAction)
                     {
                         actionTimer = 2.0f;
@@ -108,27 +123,37 @@ public class BossEnemy : MonoBehaviour
                 break;
             case EnemyState.CHASING:
                 {
-                    speed = 600;
+                    speed = 300;
                     if (!SightRange())
                     {
                         currentEnemyState = EnemyState.IDLE;
                         doingAction = false;
+                    }
+                    else
+                    {
+                        currentEnemyState = EnemyState.ATTACKING;
                     }
                 }
                 break;
             case EnemyState.ATTACKING:
                 {
                     speed = 300;
-                    Collider2D meleeRange = Physics2D.OverlapCircle((Vector2)transform.position, 3, LayerMask.GetMask("Player"));
 
-                    if (meleeRange == true)
+                    if (canAttack == true)
                     {
-                        gameObject.GetComponent<BossAttack>().Melee(meleeRange.gameObject);
+                        GameObject player = GameObject.Find("Player");
+                        if (MeleeRange() == true && player != null)
+                        {
+                            gameObject.GetComponent<BossAttack>().Melee(player);
+                        }
+                        else
+                        {
+                            gameObject.GetComponent<BossAttack>().Shoot(player);
+                        }
+                        attackTimer = 0;
+                        canAttack = false;
                     }
-                    else
-                    {
-                        gameObject.GetComponent<BossAttack>().Shoot(meleeRange.gameObject);
-                    }
+                    //ResetAttackCooldown();
                     currentEnemyState = EnemyState.CHASING;
                 }
                 break;
@@ -210,7 +235,7 @@ public class BossEnemy : MonoBehaviour
 
     bool SightRange()
     {
-        Collider2D collider = Physics2D.OverlapCircle((Vector2)transform.position, 15, LayerMask.GetMask("Player"));
+        Collider2D collider = Physics2D.OverlapCircle((Vector2)transform.position, 10, LayerMask.GetMask("Player"));
         if (collider != null)
         {
             // Set the target of the enemy
@@ -220,6 +245,20 @@ public class BossEnemy : MonoBehaviour
         else
         {
             target = null;
+            return false;
+        }
+    }
+
+    bool MeleeRange()
+    {
+        Collider2D inRange = Physics2D.OverlapCircle((Vector2)transform.position, 5, LayerMask.GetMask("Player"));
+
+        if (inRange != null)
+        {
+            return true;
+        }
+        else
+        {
             return false;
         }
     }

@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
+    public GameObject bulletOwner;
     //[SerializeField] Vector2 knockbackForce;
     void Start()
     {
@@ -14,18 +15,14 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Terrain"))
         {
-            Debug.Log("Bullet hit object");
-            
             Destroy(gameObject);
         }
-        else if (other.gameObject.layer == LayerMask.NameToLayer("Default"))
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            if (other.gameObject.CompareTag("Enemy"))
-            {
-                other.gameObject.GetComponent<EnemyStats>().damageTaken = true;
-                //other.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackForce);
-            }
+            other.gameObject.GetComponent<PlayerStats>()?.Damaged(bulletOwner.GetComponent<EnemyStats>().GetAtk());
+            //other.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackForce);
             Destroy(gameObject);
+
         }
     }
 }

@@ -6,7 +6,7 @@ public class PlayerStats : MonoBehaviour
 {
     [SerializeField]int maxHP = 100, HP, ATK = 5;
 
-    bool damageTaken;
+    public bool damageTaken;
     // Start is called before the first frame update
     void Start()
     {
