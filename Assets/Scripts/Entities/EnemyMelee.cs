@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyMelee : MonoBehaviour
 {
     EnemyStats enemyStats;
+    Vector2 knockbackForce;
 
     void Start()
     {
@@ -18,7 +19,7 @@ public class EnemyMelee : MonoBehaviour
             if (other.gameObject.CompareTag("Player"))
             {
                 other.gameObject.GetComponent<PlayerStats>().Damaged(enemyStats.GetAtk());
-                //other.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackForce);
+                other.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackForce);
             }
         }
     }
