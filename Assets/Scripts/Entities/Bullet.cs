@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    //[SerializeField] Vector2 knockbackForce;
+    Vector2 knockbackForce;
     void Start()
     {
+        knockbackForce = GetComponent<Rigidbody2D>().velocity;
         Destroy(gameObject, 5);
     }
 
@@ -23,7 +24,10 @@ public class Bullet : MonoBehaviour
             if (other.gameObject.CompareTag("Enemy"))
             {
                 other.gameObject.GetComponent<EnemyStats>().damageTaken = true;
-                //other.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackForce);
+                if (other.gameObject.GetComponent<Rigidbody2D>() != null)
+                {
+                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackForce);
+                }
             }
             Destroy(gameObject);
         }

@@ -25406,6 +25406,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2499570011457305248, guid: 6b8f7f9335575dc4fa07cc5f1f785d99, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499570011457305248, guid: 6b8f7f9335575dc4fa07cc5f1f785d99, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2499570011457305248, guid: 6b8f7f9335575dc4fa07cc5f1f785d99, type: 3}
+      propertyPath: m_GravityScale
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2499570011457305255, guid: 6b8f7f9335575dc4fa07cc5f1f785d99, type: 3}
       propertyPath: m_RootOrder
       value: 9

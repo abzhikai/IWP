@@ -34,7 +34,7 @@ public class BossAttack : MonoBehaviour
         enemyBullet.bulletOwner = gameObject;
         float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
         go.transform.rotation = Quaternion.Euler(0, 0, -angle);
-        go.GetComponent<Rigidbody2D>().velocity = dir * 10f;
+        go.GetComponent<Rigidbody2D>().velocity = dir.normalized * 50f;
 
         if (dir.x > 0)
             spriteRenderer2D.flipX = true;

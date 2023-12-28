@@ -93,7 +93,7 @@ public class BossEnemy : MonoBehaviour
                 break;
             case EnemyState.PATROLING:
                 {
-                    speed = 300;
+                    speed = 600;
                     if (!doingAction)
                     {
                         actionTimer = 2.0f;
@@ -123,7 +123,7 @@ public class BossEnemy : MonoBehaviour
                 break;
             case EnemyState.CHASING:
                 {
-                    speed = 300;
+                    speed = 600;
                     if (!SightRange())
                     {
                         currentEnemyState = EnemyState.IDLE;
@@ -137,7 +137,7 @@ public class BossEnemy : MonoBehaviour
                 break;
             case EnemyState.ATTACKING:
                 {
-                    speed = 300;
+                    speed = 600;
 
                     if (canAttack == true)
                     {
