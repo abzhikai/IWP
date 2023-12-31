@@ -96,6 +96,7 @@ public class PlayerAttack : MonoBehaviour
             meleeattack.transform.localPosition = new Vector3(-1, pos.y, pos.z);
             //meleeattack.transform.eulerAngles = new Vector3(0, 0, 0);
             meleeattack.GetComponentInChildren<SpriteRenderer>().flipX = false;
+            meleeattack.GetComponentInChildren<Melee>().SetDirToLEFT();
         }
         else if (dir.x > 0)
         {
@@ -105,6 +106,7 @@ public class PlayerAttack : MonoBehaviour
             meleeattack.transform.localPosition = new Vector3(1, pos.y, pos.z);
             //meleeattack.transform.eulerAngles = new Vector3(0, 180, 0);
             meleeattack.GetComponentInChildren<SpriteRenderer>().flipX = true;
+            meleeattack.GetComponentInChildren<Melee>().SetDirToRIGHT();
         }
         meleeattack.SetActive(true);
         yield return new WaitForSeconds(0.7f);

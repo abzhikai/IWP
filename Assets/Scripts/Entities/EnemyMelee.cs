@@ -7,6 +7,12 @@ public class EnemyMelee : MonoBehaviour
     EnemyStats enemyStats;
     Vector2 knockbackForce;
 
+    enum MeleeDir
+    {
+        LEFT,
+        RIGHT,
+    }
+
     void Start()
     {
         enemyStats = GetComponentInParent<EnemyStats>();

@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class Melee : MonoBehaviour
 {
-    //[SerializeField] Vector2 knockbackForce;
+    Vector2 knockbackForce = new Vector2(1, 1);
+
+    enum MeleeDir
+    {
+        LEFT,
+        RIGHT,
+    }
+
+    MeleeDir meleeDir;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Default"))
@@ -13,8 +22,25 @@ public class Melee : MonoBehaviour
             if (other.gameObject.CompareTag("Enemy"))
             {
                 other.gameObject.GetComponent<EnemyStats>().damageTaken = true;
-                //other.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackForce);
+                if (meleeDir == MeleeDir.LEFT)
+                {
+                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 20, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 20, ForceMode2D.Impulse);
+                }
             }
         }
+    }
+
+    public void SetDirToLEFT()
+    {
+        meleeDir = MeleeDir.LEFT;
+    }
+
+    public void SetDirToRIGHT()
+    {
+        meleeDir = MeleeDir.RIGHT;
     }
 }
