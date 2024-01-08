@@ -235,7 +235,7 @@ public class BossEnemy : MonoBehaviour
 
     bool SightRange()
     {
-        Collider2D collider = Physics2D.OverlapCircle((Vector2)transform.position, 10, LayerMask.GetMask("Player"));
+        Collider2D collider = Physics2D.OverlapCircle((Vector2)transform.position, 12, LayerMask.GetMask("Player"));
         if (collider != null)
         {
             // Set the target of the enemy

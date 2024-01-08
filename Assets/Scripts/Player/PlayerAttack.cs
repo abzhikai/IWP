@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -44,7 +45,7 @@ public class PlayerAttack : MonoBehaviour
             if (currentAttackType < AttackType.MELEE)
                 currentAttackType++;
         }
-        if (Input.GetMouseButton(0) && canAttack)
+        if (Input.GetMouseButton(0) && canAttack && !EventSystem.current.IsPointerOverGameObject())
         {
             if (currentAttackType == AttackType.SHOOTING)
             {

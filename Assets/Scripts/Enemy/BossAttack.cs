@@ -50,6 +50,15 @@ public class BossAttack : MonoBehaviour
         Vector3 dir = target.transform.position - transform.position; // Calculate direction relative to the enemy
         dir.Normalize(); // Normalize the direction vector
 
+        if (dir.x < 0)
+        {
+            meleeattack.GetComponentInChildren<EnemyMelee>().SetDirToLEFT();
+        }
+        else
+        {
+            meleeattack.GetComponentInChildren<EnemyMelee>().SetDirToRIGHT();
+        }
+
         meleeattack.transform.localPosition = new Vector3(dir.x, pos.y, pos.z);
 
         // Set flipX based on the direction

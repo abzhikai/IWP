@@ -13,6 +13,8 @@ public class EnemyMelee : MonoBehaviour
         RIGHT,
     }
 
+    MeleeDir meleeDir;
+
     void Start()
     {
         enemyStats = GetComponentInParent<EnemyStats>();
@@ -25,8 +27,25 @@ public class EnemyMelee : MonoBehaviour
             if (other.gameObject.CompareTag("Player"))
             {
                 other.gameObject.GetComponent<PlayerStats>().Damaged(enemyStats.GetAtk());
-                other.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackForce);
+                if (meleeDir == MeleeDir.LEFT)
+                {
+                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 20, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 20, ForceMode2D.Impulse);
+                }
             }
         }
+    }
+
+    public void SetDirToLEFT()
+    {
+        meleeDir = MeleeDir.LEFT;
+    }
+
+    public void SetDirToRIGHT()
+    {
+        meleeDir = MeleeDir.RIGHT;
     }
 }

@@ -117,11 +117,13 @@ public class Spawner : MonoBehaviour
         while (loop)
         {
             spawningPosition.transform.position = GetRandomPos();
-            Collider2D collider = Physics2D.OverlapCircle(spawningPosition.transform.position, 3, LayerMask.GetMask("Terrain"));
+            Collider2D collider = Physics2D.OverlapCircle(spawningPosition.transform.position, 3, LayerMask.GetMask("Default"));
             RaycastHit2D hit = Physics2D.Raycast(spawningPosition.transform.position, Vector2.down, Mathf.Infinity, ~LayerMask.GetMask("Zone"));
             if (collider == null && hit.collider != null)
             {
                 counter--;
+                // Set the spawn position to be close to the ground
+                spawningPosition.transform.position = new Vector3(spawningPosition.transform.position.x, hit.point.y + 3, spawningPosition.transform.position.z);
                 vector3List.Add(spawningPosition.transform.position);
                 if (counter == 0)
                 {

@@ -79,6 +79,7 @@ public class PlayerMovement : MonoBehaviour
     // FixedUpdate is used for physics calculation
     void FixedUpdate()
     {
+        Physics2D.queriesHitTriggers = false;
         // Jump Check
         isMidAir = !Physics2D.Raycast(rigidBody2D.position, -Vector2.up, 0.1f + (GetComponent<Collider2D>().bounds.extents.y), ~LayerMask.GetMask("Player"));
         

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class GameUIManager : MonoBehaviour
 {
     // Add the UI Variables
     [SerializeField] Slider PlayerHP;
@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player != null)
+        if (player.activeSelf)
         {
             currentPlayerHP = player.GetComponent<PlayerStats>().GetHP();
             PlayerHP.value = currentPlayerHP;
@@ -35,5 +35,10 @@ public class UIManager : MonoBehaviour
         {
             gameOverPanel.SetActive(true);
         }
+    }
+
+    public void OnRespawnPlayer()
+    {
+        gameOverPanel.SetActive(false);
     }
 }

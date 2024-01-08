@@ -18,7 +18,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (HP <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
@@ -40,5 +40,16 @@ public class PlayerStats : MonoBehaviour
     public int GetMaxHP()
     {
         return maxHP;
+    }
+
+    public void SetHPMax()
+    {
+        HP = maxHP;
+    }
+
+    public void Respawn()
+    {
+        SetHPMax();
+        gameObject.SetActive(true);
     }
 }

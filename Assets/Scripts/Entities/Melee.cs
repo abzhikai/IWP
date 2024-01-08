@@ -24,11 +24,11 @@ public class Melee : MonoBehaviour
                 other.gameObject.GetComponent<EnemyStats>().damageTaken = true;
                 if (meleeDir == MeleeDir.LEFT)
                 {
-                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 20, ForceMode2D.Impulse);
+                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 10, ForceMode2D.Impulse);
                 }
                 else
                 {
-                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 20, ForceMode2D.Impulse);
+                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 10, ForceMode2D.Impulse);
                 }
             }
         }
