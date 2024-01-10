@@ -17,6 +17,9 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] int maxSpawnCount = 3;
 
+    [SerializeField] float spawnCooldown = 30;
+    float spawnTimer = 30;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,20 +31,28 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemycount = enemyList.transform.childCount;
-        // If there are no enemies, instantiate them after a period of time
-        if (enemycount == 0)
+        // Spawn groups of enemies if enemy is inside of the spawning range
+        spawnTimer += Time.deltaTime;
+        if (spawnTimer >= spawnCooldown && spawningArea.GetComponent<SpawnZone>().GetStartSpawn() == true)
         {
-            //// Check if the area is somewhere feasible
-            //validPosCheck();
-            //// Spawn the prefab
-            //if (spawn)
-            //{
-            //    randomSpawn();
-            //    spawn = false;
-            //}
             SpawnGroup();
+            spawnTimer = 0;
         }
+
+        //enemycount = enemyList.transform.childCount;
+        // If there are no enemies, instantiate them after a period of time
+        //if (enemycount == 0)
+        //{
+        //    // Check if the area is somewhere feasible
+        //    validPosCheck();
+        //    // Spawn the prefab
+        //    if (spawn)
+        //    {
+        //        randomSpawn();
+        //        spawn = false;
+        //    }
+        //    SpawnGroup();
+        //}
     }
 
     Vector2 GetRandomPos()
@@ -137,7 +148,7 @@ public class Spawner : MonoBehaviour
         {
             GameObject enemy = Instantiate(enemyPrefab, r, Quaternion.identity);
             enemy.transform.parent = enemyList.transform;
-            Debug.Log("Enemy Spawned");
         }
+        corSpawn = null;
     }
 }

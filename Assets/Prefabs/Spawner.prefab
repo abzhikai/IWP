@@ -50,6 +50,7 @@ MonoBehaviour:
   spawningPosition: {fileID: 7582106876850900453}
   enemyPrefab: {fileID: 1963947529413402413, guid: 2d6fc9c7cf4be684f8339900b541a11a, type: 3}
   maxSpawnCount: 3
+  spawnCooldown: 30
 --- !u!1 &7582106876066835830
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,6 +61,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7582106876066835831}
   - component: {fileID: 7582106876066835828}
+  - component: {fileID: 7609095167352128843}
   m_Layer: 7
   m_Name: SpawningArea
   m_TagString: Untagged
@@ -108,6 +110,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7609095167352128843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7582106876066835830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d2ceae0abb78b47bc880e738bcd29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7582106876850900453
 GameObject:
   m_ObjectHideFlags: 0

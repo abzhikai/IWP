@@ -18,17 +18,16 @@ public class Melee : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Default"))
         {
-            Debug.Log("Melee hit object");
             if (other.gameObject.CompareTag("Enemy"))
             {
                 other.gameObject.GetComponent<EnemyStats>().damageTaken = true;
                 if (meleeDir == MeleeDir.LEFT)
                 {
-                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 10, ForceMode2D.Impulse);
+                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 15, ForceMode2D.Impulse);
                 }
                 else
                 {
-                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 10, ForceMode2D.Impulse);
+                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 15, ForceMode2D.Impulse);
                 }
             }
         }

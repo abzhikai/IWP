@@ -137,7 +137,7 @@ public class GroundEnemy : MonoBehaviour
                 }
                 break;
         }
-        dirChange = EdgeCheck();
+        //dirChange = EdgeCheck();
         //Debug.Log("Is Near Edge: " + EdgeCheck());
         if (EdgeCheck() == true)
         {
@@ -158,7 +158,6 @@ public class GroundEnemy : MonoBehaviour
             GameObject player =  GameObject.Find("Player");
             int playerATK = player.GetComponent<PlayerStats>().GetAtk();
             enemyStats.Damaged(playerATK);
-            Debug.Log("Dealt DMG");
             dmgTimer = 0;
             enemyStats.damageTaken = false;
         }
@@ -201,15 +200,15 @@ public class GroundEnemy : MonoBehaviour
 
         rigidBody2D.AddForce(force);
 
-        if (dirChange)
-        {
-            rigidBody2D.velocity = Vector2.zero;
-        }
+        //if (dirChange)
+        //{
+        //    rigidBody2D.velocity = Vector2.zero;
+        //}
     }
 
     bool SightRange()
     {
-        Collider2D collider = Physics2D.OverlapCircle((Vector2)transform.position, 10, LayerMask.GetMask("Player"));
+        Collider2D collider = Physics2D.OverlapCircle((Vector2)transform.position, 20, LayerMask.GetMask("Player"));
         if (collider != null)
         {
             // Set the target of the enemy
