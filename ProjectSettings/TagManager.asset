@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Interactable
   layers:
   - Default
   - TransparentFX
@@ -39,6 +40,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Skybox
+    uniqueID: 3628832555
+    locked: 0
   - name: Background
     uniqueID: 3676676719
     locked: 0
@@ -47,4 +51,7 @@ TagManager:
     locked: 0
   - name: Terrain
     uniqueID: 1552286957
+    locked: 0
+  - name: UI
+    uniqueID: 176998973
     locked: 0
