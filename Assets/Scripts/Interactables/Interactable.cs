@@ -5,6 +5,7 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     bool canInteract;
+    //GameManager gameManager = GameManager.instance;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,10 +15,10 @@ public class Interactable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && canInteract)
-        {
-
-        }
+        //if (Input.GetKeyDown(KeyCode.F) && canInteract)
+        //{
+        //    gameManager.NoticeUpdate();
+        //}
     }
 
     public bool GetCanInteract()

@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
                 other.gameObject.GetComponent<EnemyStats>().damageTaken = true;
                 if (other.gameObject.GetComponent<Rigidbody2D>() != null)
                 {
-                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackForce * 5);
+                    other.gameObject.GetComponent<Rigidbody2D>().AddForce(knockbackForce * 10);
                 }
             }
             Destroy(gameObject);

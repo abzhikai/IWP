@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class MainMenuUIManager : MonoBehaviour
 {
+    [SerializeField] GameObject storyPanel;
+    [SerializeField] Button storyButton;
     [SerializeField] Button startButton;
 
     // Start is called before the first frame update
@@ -18,4 +20,15 @@ public class MainMenuUIManager : MonoBehaviour
         ScenesManager.Instance.LoadScene("GameScene");
         Time.timeScale = 1;
     }
+
+    public void OpenStoryPanel()
+    {
+        storyPanel.SetActive(true);
+    }
+
+    public void CloseStoryPanel()
+    {
+        storyPanel.SetActive(false);
+    }
+
 }

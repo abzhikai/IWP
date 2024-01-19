@@ -31,33 +31,46 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
 
-        // Controls the attack type
-        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
-        if (scrollInput > 0f)
-        {
-            // Scrolled up
-            if (currentAttackType > AttackType.SHOOTING)
-                currentAttackType--;
-        }
-        else if (scrollInput < 0f)
-        {
-            // Scrolled down
-            if (currentAttackType < AttackType.MELEE)
-                currentAttackType++;
-        }
+        //// Controls the attack type
+        //float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+        //if (scrollInput > 0f)
+        //{
+        //    // Scrolled up
+        //    if (currentAttackType > AttackType.SHOOTING)
+        //        currentAttackType--;
+        //}
+        //else if (scrollInput < 0f)
+        //{
+        //    // Scrolled down
+        //    if (currentAttackType < AttackType.MELEE)
+        //        currentAttackType++;
+        //}
+        //if (Input.GetMouseButton(0) && canAttack && !EventSystem.current.IsPointerOverGameObject())
+        //{
+        //    if (currentAttackType == AttackType.SHOOTING)
+        //    {
+        //        Shoot();
+        //    }
+        //    else if (currentAttackType == AttackType.MELEE)
+        //    {
+        //        StartCoroutine(Melee());
+        //    }
+
+        //    canAttack = false;
+
+        //    StartCoroutine(ResetAttackCooldown());
+        //}
+
         if (Input.GetMouseButton(0) && canAttack && !EventSystem.current.IsPointerOverGameObject())
         {
-            if (currentAttackType == AttackType.SHOOTING)
-            {
-                Shoot();
-            }
-            else if (currentAttackType == AttackType.MELEE)
-            {
-                StartCoroutine(Melee());
-            }
-
+            Shoot();
             canAttack = false;
-
+            StartCoroutine(ResetAttackCooldown());
+        }
+        else if (Input.GetMouseButton(1) && canAttack && !EventSystem.current.IsPointerOverGameObject())
+        {
+            StartCoroutine(Melee());
+            canAttack = false;
             StartCoroutine(ResetAttackCooldown());
         }
     }

@@ -47,6 +47,11 @@ public class PlayerStats : MonoBehaviour
         HP = maxHP;
     }
 
+    public void AddHP(int HPAdded)
+    {
+        HP += HPAdded;
+    }
+
     public void Respawn()
     {
         SetHPMax();

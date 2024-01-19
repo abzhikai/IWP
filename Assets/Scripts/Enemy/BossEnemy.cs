@@ -34,7 +34,7 @@ public class BossEnemy : MonoBehaviour
     float dmgTimer = 0;
     bool knockback;
 
-    float attackCooldown = 1f;
+    float attackCooldown = 5f;
     bool canAttack = true;
     float attackTimer = 0;
 

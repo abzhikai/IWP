@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerRespawn : MonoBehaviour
 {
@@ -10,5 +11,6 @@ public class PlayerRespawn : MonoBehaviour
     {
         GetComponent<PlayerStats>().Respawn();
         transform.position = playerSpawnPoint.transform.position;
+        SceneManager.LoadScene("GameScene");
     }
 }
