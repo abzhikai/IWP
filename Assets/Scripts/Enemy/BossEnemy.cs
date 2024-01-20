@@ -182,8 +182,11 @@ public class BossEnemy : MonoBehaviour
         {
             dmgTimer += Time.deltaTime;
             GameObject player = GameObject.Find("Player");
-            int playerATK = player.GetComponent<PlayerStats>().GetAtk();
-            enemyStats.Damaged(playerATK);
+            if (player != null)
+            {
+                int playerATK = player.GetComponent<PlayerStats>().GetAtk();
+                enemyStats.Damaged(playerATK);
+            }
             Debug.Log("Dealt DMG");
             dmgTimer = 0;
             enemyStats.damageTaken = false;

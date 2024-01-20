@@ -29,4 +29,9 @@ public class InteractZone : MonoBehaviour
             indicator.SetActive(false);
         }
     }
+
+    public bool getPlayerInRange()
+    {
+        return playerInRange;
+    }
 }

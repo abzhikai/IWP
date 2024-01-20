@@ -13,6 +13,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Physics2D.queriesHitTriggers = false;
         if (other.gameObject.layer == LayerMask.NameToLayer("Terrain"))
         {
             Debug.Log("Bullet hit object");

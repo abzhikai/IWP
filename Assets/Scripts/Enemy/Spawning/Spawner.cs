@@ -17,8 +17,8 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] int maxSpawnCount = 3;
 
-    [SerializeField] float spawnCooldown = 30;
-    float spawnTimer = 30;
+    [SerializeField] float spawnCooldown = 45;
+    float spawnTimer = 45;
 
     // Start is called before the first frame update
     void Start()

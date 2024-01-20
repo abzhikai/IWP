@@ -8,7 +8,7 @@ public class SpawnZone : MonoBehaviour
 
     void Start()
     {
-        startSpawn = true;
+        startSpawn = false;
     }
 
     private void OnTriggerStay2D(Collider2D other)

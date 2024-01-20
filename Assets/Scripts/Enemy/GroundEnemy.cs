@@ -19,7 +19,7 @@ enum Direction
 
 public class GroundEnemy : MonoBehaviour
 {
-    int speed = 750, jumpHeight = 750;
+    int speed = 500, jumpHeight = 500;
     Animator animator;
 
     private Rigidbody2D rigidBody2D;
@@ -88,7 +88,7 @@ public class GroundEnemy : MonoBehaviour
                 break;
             case EnemyState.PATROLING:
                 {
-                    speed = 600;
+                    speed = 500;
                     if (!doingAction)
                     {
                         actionTimer = 2.0f;
@@ -118,7 +118,7 @@ public class GroundEnemy : MonoBehaviour
                 break;
             case EnemyState.CHASING:
                 {
-                    speed = 750;
+                    speed = 600;
                     if (!SightRange())
                     {
                         currentEnemyState = EnemyState.IDLE;

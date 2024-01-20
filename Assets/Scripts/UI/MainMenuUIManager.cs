@@ -9,10 +9,12 @@ public class MainMenuUIManager : MonoBehaviour
     [SerializeField] Button storyButton;
     [SerializeField] Button startButton;
 
+    Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        animator = storyPanel.GetComponentInChildren<Animator>();
     }
 
     public void StartGame()
